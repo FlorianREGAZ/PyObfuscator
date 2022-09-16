@@ -4,9 +4,10 @@ Make your code difficult to understand and read. Minimize exposure to attacks.
 
 This is an educational project to learn more about the Abstract-Syntax-Tree library of python and to explore the possibilities you have with python obfuscation.
 
-The project is still in an very early stage of development. It currently only works on very simple scripts, so use it at your own risk!
+The project is still in a very early stage of development. It currently only works on very simple scripts, so use it at your own risk!
 
 ## Examples
+Disclaimer: the third translation is not included yet, but it is as simple as renaming `MEMORY` to `m` and `OPCODES` to `o` etc.
 
 Example 1: 
 ```python
@@ -31,7 +32,6 @@ m[2] = o[0](m[0], m[1])
 ```
 
 Example 2:
-Example1: 
 ```python
 def print_sum(number1, number2):
     print(number1 + number2)
@@ -63,6 +63,9 @@ m[0] = 1
 m[1] = 5
 m[2] = o[4](0, 0, 1)
 ```
+
+## Quick Start
+A section explaining how to use the obfuscator will come as soon as it is useable for more complex code. 
 
 ## Planned Features
 - Support for more complex code (classes, more operations etc.)
