@@ -23,7 +23,7 @@ MEMORY[1] = 5
 MEMORY[2] = OPCODES[0](MEMORY[0], MEMORY[1])
 
 # Translates to ------------------------------------------
-# from vm import *
+from vm import *
 
 m[0] = 1
 m[1] = 5
@@ -42,7 +42,7 @@ number2 = 5
 print_sum(number1, number2)
 
 # Translates to ------------------------------------------
-# from vm import *
+from vm import *
 
 def function1(arg1, arg2):
     print(OPCODES[0](arg1, arg2))
