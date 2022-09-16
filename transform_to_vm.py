@@ -3,7 +3,9 @@ import ast
 class GeneralTransformer(ast.NodeTransformer):
 
     def visit_Module(self, node: ast.Module):
-        """Add import statement, to import required variables for the VM"""
+        """
+        Add import statement, to import required variables for the VM
+        """
         node.body.insert(0, ast.ImportFrom(
             module='vm',
             names=[
@@ -20,7 +22,9 @@ class AssignTransformer(ast.NodeTransformer):
         self.storage = storage
 
     def visit_Assign(self, node: ast.Assign):
-        """remove variables and use memory instead"""
+        """
+        remove variables and use memory instead
+        """
         new_function_names = [value["new_name"] for value in self.storage["function_memory"].values()]
         if type(node.value) == ast.Name and node.value.id in new_function_names:
             return node
@@ -47,7 +51,9 @@ class CallTransformer(ast.NodeTransformer):
         self.storage = storage
 
     def visit_Call(self, node: ast.Call):
-        """call functions from function memory"""
+        """
+        call functions from function memory
+        """
         if node.func.id in self.storage["function_memory"]:
             function_index = self.storage["function_memory"][node.func.id]["index"]
             new_arguments = [ast.Constant(value=function_index)]
@@ -72,7 +78,9 @@ class FunctionTransformer(ast.NodeTransformer):
         self.storage = storage
 
     def visit_FunctionDef(self, node: ast.FunctionDef):
-        """rename all functions and their arguments"""
+        """
+        rename all functions and their arguments
+        """
 
         # rename function
         new_function_name = f"function{self.storage['function_memory_increment']}"
@@ -111,11 +119,12 @@ class FunctionTransformer(ast.NodeTransformer):
 class NameTransformer(ast.NodeTransformer):
 
     def __init__(self, storage):
-        # ignore VM imports & python in house functions (for now)
         self.storage = storage
 
     def visit_Name(self, node: ast.Name):
-        """replace all variables with their memory position"""
+        """
+        replace all variables with their memory position
+        """
         if node.id in self.storage["ignore_list"]:
             return node
 
@@ -139,6 +148,9 @@ class OperatorTransformer(ast.NodeTransformer):
         }
 
     def visit_BinOp(self, node: ast.BinOp):
+        """
+        Replace binary operations like +, -, *, /
+        """
         if type(node.op) not in self.opcodes:
             raise Exception("Binary Operation not supported")
 
@@ -156,6 +168,10 @@ class OperatorTransformer(ast.NodeTransformer):
 
 
 def main():
+    """
+    Parse the code out of the main.py file and obfuscate it.
+    Currently is taking the main.py by default. I'll implement a way to do it via command in near future.
+    """
     with open("main.py", "r") as f:
         code = f.read()
 
@@ -168,11 +184,12 @@ def main():
     }
 
     tree = ast.parse(code)
-    # set parent nodes
+    # create parent nodes
     for node in ast.walk(tree):
         for child in ast.iter_child_nodes(node):
             child.parent = node
 
+    # run all transformers to obfuscate the code
     tree = ast.fix_missing_locations(GeneralTransformer().visit(tree))
     tree = ast.fix_missing_locations(FunctionTransformer(storage).visit(tree))
     tree = ast.fix_missing_locations(AssignTransformer(storage).visit(tree))
