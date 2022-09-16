@@ -2,12 +2,12 @@
 
 Make your code difficult to understand and read. Minimize exposure to attacks.
 
-This is an educational project to learn more about the Abstract-Syntax-Tree library of python and to explore the possibilities you have with python obfuscation.
+This is an educational project to learn more about the Abstract-Syntax-Tree library of Python and to explore the possibilities you have with Python-Obfuscation.
 
 The project is still in a very early stage of development. It currently only works on very simple scripts, so use it at your own risk!
 
 ## Examples
-Disclaimer: the third translation is not included yet, but it is as simple as renaming `MEMORY` to `m` and `OPCODES` to `o` etc.
+Disclaimer: the third translation is not included yet, but it is as simple as renaming `MEMORY` to `m`, `OPCODES` to `o` etc.
 
 Example 1: 
 ```python
