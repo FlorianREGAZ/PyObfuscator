@@ -3,10 +3,6 @@ MEMORY = {}
 CUSTOM_FUNCTIONS = {}
 
 def execute_function(reference, *arguments):
-    #new_arguments = ()
-    #for arg in arguments:
-    #    new_arguments += (MEMORY[arg],)
-
     new_arguments = (MEMORY[arg] for arg in arguments)
     return CUSTOM_FUNCTIONS[reference](*new_arguments)
 
