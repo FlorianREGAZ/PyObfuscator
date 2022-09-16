@@ -23,7 +23,7 @@ def opcode_3(arg1, arg2):
 def opcode_4(arg1, arg2):
     return arg1 / arg2
 
-# will save all in house functions of python from +, -, *, / to sum, list, dict etc. etc.
+# will save all in house functions of python from +, -, *, / to sum, list, dict, print etc. etc.
 OPCODES = [
     opcode_1,
     opcode_2,
