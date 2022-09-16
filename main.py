@@ -1,3 +1,6 @@
+# The file that will get obfuscated in transform_to_vm.py.
+# This will be improved in near future.
+
 def print_sum(number1, number2):
     print(number1 + number2)
 
