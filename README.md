@@ -55,7 +55,7 @@ MEMORY[2] = OPCODES[4](0, 0, 1)
 
 
 # Translates to ------------------------------------------
-# from vm import *
+from vm import *
 
 def function1(arg1, arg2):
     print(OPCODES[0](arg1, arg2))
