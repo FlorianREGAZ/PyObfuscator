@@ -33,8 +33,6 @@ m[2] = o[0](m[0], m[1])
 Example 2:
 Example1: 
 ```python
-from vm import *
-
 def print_sum(number1, number2):
     print(number1 + number2)
 
